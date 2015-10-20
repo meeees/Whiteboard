@@ -16,14 +16,12 @@
         <KeyBinding Command="main:WhiteboardCommands.MoveActiveBackwards" Modifiers="Control+Shift" Key="Tab"/>
     </Window.InputBindings>
     <Grid>
-        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="542">
+        <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="File" Height="20">
                 <MenuItem Header="New" HorizontalAlignment="Left" Width="110" Margin="0,0,0,0" Click="Menu_New"/>
                 <MenuItem Header="Exit" HorizontalAlignment="Left" Width="110" Margin="0,0,0,0" Click="Menu_Exit"/>
             </MenuItem>
         </Menu>
-        <TabControl x:Name="tabController" Margin="0,20,0,0">
-            
-        </TabControl>
+        <TabControl x:Name="tabController" Margin="0,20,0,0"/>
     </Grid>
 </Window>
