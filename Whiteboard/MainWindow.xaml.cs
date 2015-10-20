@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace Whiteboard
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -22,7 +23,6 @@ namespace Whiteboard
     {
         Polyline currentLine;
         int newTabCount = 1;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -61,6 +61,10 @@ namespace Whiteboard
                 TabControl grandParent = (TabControl)parent.Parent;
                 grandParent.Items.Remove(parent);
             }
+        }
+        void CloseActiveTab(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Sucess");
         }
 
         void Menu_Exit(object sender, EventArgs e)
