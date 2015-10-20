@@ -99,9 +99,24 @@ namespace Whiteboard
             tabController.SelectedItem = newTab;
         }
 
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        void MoveActiveF(object sender, RoutedEventArgs e)
         {
+            int selected = tabController.SelectedIndex + 1;
+            if(selected >= tabController.Items.Count)
+            {
+                selected = 0;
+            }
+            tabController.SelectedIndex = selected;
+        }
 
+        void MoveActiveB(object sender, RoutedEventArgs e)
+        {
+            int selected = tabController.SelectedIndex - 1;
+            if (selected < 0)
+            {
+                selected = tabController.Items.Count - 1;
+            }
+            tabController.SelectedIndex = selected;
         }
     }
 }

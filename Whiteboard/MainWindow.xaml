@@ -6,10 +6,14 @@
     <Window.CommandBindings>
         <CommandBinding Command="main:WhiteboardCommands.CloseActiveBoard" Executed="CloseActiveBoard"/>
         <CommandBinding Command="main:WhiteboardCommands.CreateNewBoard" Executed="AddNewBoard"/>
+        <CommandBinding Command="main:WhiteboardCommands.MoveActiveForwards" Executed="MoveActiveF"/>
+        <CommandBinding Command="main:WhiteboardCommands.MoveActiveBackwards" Executed="MoveActiveB"/>
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Command="main:WhiteboardCommands.CloseActiveBoard" Modifiers="Control" Key="W"/>
         <KeyBinding Command="main:WhiteboardCommands.CreateNewBoard" Modifiers="Control" Key="N"/>
+        <KeyBinding Command="main:WhiteboardCommands.MoveActiveForwards" Modifiers="Control" Key="Tab"/>
+        <KeyBinding Command="main:WhiteboardCommands.MoveActiveBackwards" Modifiers="Control+Shift" Key="Tab"/>
     </Window.InputBindings>
     <Grid>
         <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="542">

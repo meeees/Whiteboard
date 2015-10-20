@@ -19,5 +19,7 @@ namespace Whiteboard
     {
         public static RoutedCommand CloseActiveBoard = new RoutedCommand();
         public static RoutedCommand CreateNewBoard = new RoutedCommand();
+        public static RoutedCommand MoveActiveForwards = new RoutedCommand();
+        public static RoutedCommand MoveActiveBackwards = new RoutedCommand();
     }
 }
