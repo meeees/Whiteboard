@@ -52,5 +52,14 @@ namespace Whiteboard
                 currentLine.Points.Add(mousePoint);
             }
         }
+        void StopConnectingDots(object sender, RoutedEventArgs e)
+        {
+            MouseEventArgs mouse = (MouseEventArgs)e;
+            if(mouse.LeftButton == MouseButtonState.Released)
+            {
+                PointCollection collect = new PointCollection(PathFunctions.SmoothPath(currentLine.Points.ToList<Point>(), 2));
+                currentLine.Points = collect;
+            }
+        }
     }
 }

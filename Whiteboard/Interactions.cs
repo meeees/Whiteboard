@@ -53,6 +53,7 @@ namespace Whiteboard
             tabCanvas.Background = Brushes.Transparent;
             tabCanvas.AddHandler(Mouse.MouseDownEvent, new RoutedEventHandler(StartConnectingDots));
             tabCanvas.AddHandler(Mouse.MouseMoveEvent, new RoutedEventHandler(ConnectTheDots));
+            tabCanvas.AddHandler(Mouse.MouseUpEvent, new RoutedEventHandler(StopConnectingDots));
             newTab.Content = tabCanvas;
             newTabCount++;
             tabController.Items.Add(newTab);
