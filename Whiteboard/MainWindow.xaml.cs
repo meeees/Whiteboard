@@ -52,7 +52,7 @@ namespace Whiteboard
                 currentLine.Points.Add(mousePoint);
             }
         }
-        void CloseTabFromHeader(object sender, RoutedEventArgs e)
+        void CloseBoardFromHeader(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
             if (mouse.MiddleButton == MouseButtonState.Pressed)
@@ -62,9 +62,13 @@ namespace Whiteboard
                 grandParent.Items.Remove(parent);
             }
         }
-        void CloseActiveTab(object sender, RoutedEventArgs e)
+        void CloseActiveBoard(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Sucess");
+            int selected = tabController.SelectedIndex;
+            if(selected != -1)
+            {
+                tabController.Items.RemoveAt(selected);
+            }
         }
 
         void Menu_Exit(object sender, EventArgs e)
@@ -74,10 +78,15 @@ namespace Whiteboard
 
         void Menu_New(object sender, EventArgs e)
         {
+            AddNewBoard(sender, (RoutedEventArgs) e);
+        }
+
+        void AddNewBoard(object sender, RoutedEventArgs e)
+        {
             TabItem newTab = new TabItem();
             Label headerLabel = new Label();
             headerLabel.Content = String.Format("Board {0}", newTabCount);
-            headerLabel.AddHandler(Mouse.MouseDownEvent, new RoutedEventHandler(CloseTabFromHeader));
+            headerLabel.AddHandler(Mouse.MouseDownEvent, new RoutedEventHandler(CloseBoardFromHeader));
             newTab.Header = headerLabel;
 
             Canvas tabCanvas = new Canvas();
@@ -88,6 +97,11 @@ namespace Whiteboard
             newTabCount++;
             tabController.Items.Add(newTab);
             tabController.SelectedItem = newTab;
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
     }
 }

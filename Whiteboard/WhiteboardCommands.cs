@@ -17,6 +17,7 @@ namespace Whiteboard
 {
     public static class WhiteboardCommands
     {
-        public static RoutedCommand CloseActiveTab = new RoutedCommand();
+        public static RoutedCommand CloseActiveBoard = new RoutedCommand();
+        public static RoutedCommand CreateNewBoard = new RoutedCommand();
     }
 }
