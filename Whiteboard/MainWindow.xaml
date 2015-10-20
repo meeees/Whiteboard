@@ -3,7 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="400" Width="550">
     <Grid>
-        <Canvas MouseMove="ConnectTheDots" MouseLeftButtonDown="StartConnectingDots" Background="Transparent">
-        </Canvas>
+        <!-- <Canvas MouseMove="ConnectTheDots" MouseLeftButtonDown="StartConnectingDots" Background="Transparent">
+        </Canvas> -->
+        <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="542">
+            <MenuItem Header="File" Height="20">
+                <MenuItem Header="New" HorizontalAlignment="Left" Width="110" Margin="0,0,0,0" Click="Menu_New"/>
+                <MenuItem Header="Exit" HorizontalAlignment="Left" Width="110" Margin="0,0,0,0" Click="Menu_Exit"/>
+            </MenuItem>
+        </Menu>
+        <TabControl x:Name="tabController" Margin="0,20,0,0">
+            
+        </TabControl>
     </Grid>
 </Window>
