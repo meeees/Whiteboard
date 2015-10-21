@@ -30,7 +30,7 @@ namespace Whiteboard
         void StartConnectingDots(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
-            if (mouse.LeftButton == MouseButtonState.Pressed)
+            if (currentLine == null && mouse.LeftButton == MouseButtonState.Pressed)
             {
                 Point mousePoint = mouse.GetPosition((IInputElement)sender);
                 currentLine = new Polyline
@@ -46,7 +46,7 @@ namespace Whiteboard
         void ConnectTheDots(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
-            if (mouse.LeftButton == MouseButtonState.Pressed)
+            if (currentLine != null && mouse.LeftButton == MouseButtonState.Pressed)
             {
                 Point mousePoint = mouse.GetPosition((IInputElement)sender);
                 currentLine.Points.Add(mousePoint);
@@ -55,10 +55,11 @@ namespace Whiteboard
         void StopConnectingDots(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
-            if(mouse.LeftButton == MouseButtonState.Released)
+            if (currentLine != null && mouse.LeftButton == MouseButtonState.Released)
             {
-                PointCollection collect = new PointCollection(PathFunctions.SmoothPath(currentLine.Points.ToList<Point>(), 2));
+                PointCollection collect = new PointCollection(PathFunctions.SmoothPath(PathFunctions.RemoveInsignificants(currentLine.Points.ToList<Point>()), 2));
                 currentLine.Points = collect;
+                currentLine = null;
             }
         }
     }

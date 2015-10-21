@@ -9,6 +9,28 @@ namespace Whiteboard
 {
     class PathFunctions
     {
+        private static float mostSignifigance = 0.05f;
+
+        public static List<Point> RemoveInsignificants(List<Point> path)
+        {
+            List<Point> reduced = new List<Point>(path);
+            for(int i = 1; i < reduced.Count; i++)
+            {
+                if(Distance(reduced[i - 1], reduced[i]) < mostSignifigance)
+                {
+                    reduced.RemoveAt(i);
+                    i--;
+                }
+            }
+            Console.WriteLine(String.Format("Before {0}, After {1}", path.Count, reduced.Count));
+            return reduced;
+        }
+        
+        public static double Distance(Point p, Point p2)
+        {
+            return Math.Sqrt((p.X - p2.X) * (p.X - p2.X) + (p.Y - p2.Y) * (p.Y - p2.Y));
+        }
+
         public static List<Point> SmoothPath(List<Point> path, int depth)
         {
             List<Point> smoothed = new List<Point>();
