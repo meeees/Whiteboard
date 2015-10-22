@@ -9,7 +9,7 @@ namespace Whiteboard
 {
     class PathFunctions
     {
-        private static float mostSignifigance = 0.05f;
+        private static float mostSignifigance = 1f;
 
         public static List<Point> RemoveInsignificants(List<Point> path)
         {
