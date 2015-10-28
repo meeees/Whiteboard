@@ -36,7 +36,7 @@ namespace Whiteboard
                 currentLine = new Polyline
                 {
                     Stroke = Brushes.Black,
-                    StrokeThickness = 2
+                    StrokeThickness = sliderStrokeSize.Value
                 };
                 Canvas canvas = (Canvas)sender;
                 canvas.Children.Add(currentLine);

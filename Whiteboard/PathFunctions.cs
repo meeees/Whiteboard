@@ -41,12 +41,7 @@ namespace Whiteboard
                 int count = 0;
                 for(int j = i - depth; j <= i + depth * 2; j++)
                 {
-                    if(j < 0)
-                    {
-                        x += path[i].X;
-                        y += path[i].Y;
-                    }
-                    else if(j >= path.Count -1)
+                    if(j < 0 || j >= path.Count -1)
                     {
                         x += path[i].X;
                         y += path[i].Y;
