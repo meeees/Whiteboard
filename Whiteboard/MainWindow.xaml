@@ -26,8 +26,12 @@
 
         </TabControl>
         <StackPanel HorizontalAlignment="Left" Height="344" Margin="5,25,0,5" VerticalAlignment="Top" Width="140">
+            <StackPanel HorizontalAlignment="Center" Height="30" Orientation="Horizontal">
+                <Button Width="25" Height="25" Margin="5,0,5,0" x:Name="buttonSelecting" Content="S" Click="StateButtonPress"/>
+                <Button Width="25" Height="25" Margin="5,0,5,0" x:Name="buttonDrawing" Content="D" Click="StateButtonPress"/>
+            </StackPanel>
             <Label Content="Stroke Size" HorizontalAlignment="Center"></Label>
-            <Slider x:Name="sliderStrokeSize" Minimum="1" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True"></Slider>
+            <Slider x:Name="sliderStrokeSize" Minimum="1" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Value="2"></Slider>
             <TextBox Text="{Binding ElementName=sliderStrokeSize, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="40" />
         </StackPanel>
     </Grid>

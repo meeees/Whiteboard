@@ -26,40 +26,65 @@ namespace Whiteboard
         public MainWindow()
         {
             InitializeComponent();
+            UpdateSelectionButtons(true);
         }
-        void StartConnectingDots(object sender, RoutedEventArgs e)
+        void CanvasMouseClick(object sender, RoutedEventArgs e)
         {
-            MouseEventArgs mouse = (MouseEventArgs)e;
-            if (currentLine == null && mouse.LeftButton == MouseButtonState.Pressed)
+            if (isDrawing)
             {
-                Point mousePoint = mouse.GetPosition((IInputElement)sender);
-                currentLine = new Polyline
+                //Create a new Polyline and add it to the Canvas
+                MouseEventArgs mouse = (MouseEventArgs)e;
+                if (currentLine == null && mouse.LeftButton == MouseButtonState.Pressed)
                 {
-                    Stroke = Brushes.Black,
-                    StrokeThickness = sliderStrokeSize.Value
-                };
-                Canvas canvas = (Canvas)sender;
-                canvas.Children.Add(currentLine);
-                currentLine.Points.Add(mousePoint);
+                    Point mousePoint = mouse.GetPosition((IInputElement)sender);
+                    currentLine = new Polyline
+                    {
+                        Stroke = Brushes.Black,
+                        StrokeThickness = sliderStrokeSize.Value
+                    };
+                    Canvas canvas = (Canvas)sender;
+                    canvas.Children.Add(currentLine);
+                    currentLine.Points.Add(mousePoint);
+                }
+            }
+            else
+            {
+
             }
         }
-        void ConnectTheDots(object sender, RoutedEventArgs e)
+        void CanvasMouseMove(object sender, RoutedEventArgs e)
         {
-            MouseEventArgs mouse = (MouseEventArgs)e;
-            if (currentLine != null && mouse.LeftButton == MouseButtonState.Pressed)
+            if (isDrawing)
             {
-                Point mousePoint = mouse.GetPosition((IInputElement)sender);
-                currentLine.Points.Add(mousePoint);
+                //Use the new mouse position to add points to the Polyline
+                MouseEventArgs mouse = (MouseEventArgs)e;
+                if (currentLine != null && mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    Point mousePoint = mouse.GetPosition((IInputElement)sender);
+                    currentLine.Points.Add(mousePoint);
+                }
+            }
+            else
+            {
+
             }
         }
-        void StopConnectingDots(object sender, RoutedEventArgs e)
+        void CanvasMouseClickEnd(object sender, RoutedEventArgs e)
         {
-            MouseEventArgs mouse = (MouseEventArgs)e;
-            if (currentLine != null && mouse.LeftButton == MouseButtonState.Released)
+            if (isDrawing)
             {
-                PointCollection collect = new PointCollection(PathFunctions.SmoothPath(PathFunctions.RemoveInsignificants(currentLine.Points.ToList<Point>()), 2));
-                currentLine.Points = collect;
-                currentLine = null;
+                //Finish drawing the current line, and then smooth it and remove redundant points
+                MouseEventArgs mouse = (MouseEventArgs)e;
+                if (currentLine != null && mouse.LeftButton == MouseButtonState.Released)
+                {
+                    PointCollection collect = new PointCollection(PathFunctions.SmoothPath(PathFunctions.RemoveInsignificants(currentLine.Points.ToList<Point>()), 2));
+                    currentLine.Points = collect;
+                    currentLine = null;
+                }
+            }
+            else
+            {
+
             }
         }
     }

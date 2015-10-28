@@ -17,6 +17,29 @@ namespace Whiteboard
 {
     public partial class MainWindow : Window
     {
+        bool isDrawing = false;
+
+        void UpdateSelectionButtons(bool newState)
+        {
+            if (newState == isDrawing) 
+                return;
+            isDrawing = newState;
+            if(isDrawing)
+            {
+                buttonDrawing.Background = Brushes.LightGray;
+                buttonSelecting.Background = Brushes.White;
+            }
+            else
+            {
+                buttonDrawing.Background = Brushes.White;
+                buttonSelecting.Background = Brushes.LightGray;
+            }
+        }
+        void StateButtonPress(object sender, RoutedEventArgs e)
+        {
+            UpdateSelectionButtons(sender == buttonDrawing);
+        }
+
         void CloseBoardFromHeader(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
@@ -51,9 +74,9 @@ namespace Whiteboard
 
             Canvas tabCanvas = new Canvas();
             tabCanvas.Background = Brushes.Transparent;
-            tabCanvas.AddHandler(Mouse.MouseDownEvent, new RoutedEventHandler(StartConnectingDots));
-            tabCanvas.AddHandler(Mouse.MouseMoveEvent, new RoutedEventHandler(ConnectTheDots));
-            tabCanvas.AddHandler(Mouse.MouseUpEvent, new RoutedEventHandler(StopConnectingDots));
+            tabCanvas.AddHandler(Mouse.MouseDownEvent, new RoutedEventHandler(CanvasMouseClick));
+            tabCanvas.AddHandler(Mouse.MouseMoveEvent, new RoutedEventHandler(CanvasMouseMove));
+            tabCanvas.AddHandler(Mouse.MouseUpEvent, new RoutedEventHandler(CanvasMouseClickEnd));
             newTab.Content = tabCanvas;
             newTabCount++;
             tabController.Items.Add(newTab);
