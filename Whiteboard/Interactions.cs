@@ -18,6 +18,7 @@ namespace Whiteboard
     public partial class MainWindow : Window
     {
         bool isDrawing = false;
+        bool toolbarOpen = true;
 
         //when the drawing or selecting button has been pressed in the toolbar, newState will be true for drawing and false for selecting
         void UpdateSelectionButtons(bool newState)
@@ -42,7 +43,7 @@ namespace Whiteboard
             UpdateSelectionButtons(sender == buttonDrawing);
         }
 
-        //whenever a board's header is clicked on, close it if it was the middle mouse button
+        //whenever a board's header is clicked on, close it if it was the middle mouse button (can be bugged by holding down middle mouse then just clicking with any other mouse button)
         void CloseBoardFromHeader(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
@@ -54,11 +55,41 @@ namespace Whiteboard
             }
         }
 
+        //will hide and unhide the toolbar
         void ButtonToggleToolbar(object sender, RoutedEventArgs e)
         {
-
+            Button senderButton = (Button) sender;
+            toolbarOpen = !toolbarOpen;
+            if(toolbarOpen)
+            {
+                SetControlVisibility(panelToolBar, Visibility.Visible, senderButton);
+                panelToolBar.Width = 140;
+                senderButton.Content = "<";
+            }
+            else
+            {
+                SetControlVisibility(panelToolBar, Visibility.Collapsed, senderButton);
+                panelToolBar.Width = 20;
+                senderButton.Content = ">";
+            }
         }
 
+        void SetControlVisibility(StackPanel parent, Visibility vis, UIElement ignore=null)
+        {
+            foreach(UIElement ui in parent.Children)
+                {
+                    if (ui is StackPanel)
+                    {
+                        SetControlVisibility((StackPanel) ui, vis);
+                    }
+                    else if(ui != ignore)
+                    {
+                        ui.Visibility = vis;
+                    }
+                }
+        }
+
+        //ctrl+W is bound to this, closes the currently active board
         void CloseActiveBoard(object sender, RoutedEventArgs e)
         {
             int selected = tabController.SelectedIndex;
@@ -68,11 +99,13 @@ namespace Whiteboard
             }
         }
 
+        //when the File->New button is clicked
         void Menu_New(object sender, EventArgs e)
         {
             AddNewBoard(sender, (RoutedEventArgs) e);
         }
 
+        //sets up a board with a canvas and gives the canvas the proper mouse bindings, then sets the active board to the new board
         void AddNewBoard(object sender, RoutedEventArgs e)
         {
             TabItem newTab = new TabItem();
