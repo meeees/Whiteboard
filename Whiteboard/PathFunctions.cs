@@ -9,8 +9,10 @@ namespace Whiteboard
 {
     class PathFunctions
     {
+        //how far apart points need to be for them to be considered significant
         private static float mostSignifigance = 1f;
 
+        //remove all points not considered significant
         public static List<Point> RemoveInsignificants(List<Point> path)
         {
             List<Point> reduced = new List<Point>(path);
@@ -26,11 +28,13 @@ namespace Whiteboard
             return reduced;
         }
         
+        //simple distance between two points
         public static double Distance(Point p, Point p2)
         {
             return Math.Sqrt((p.X - p2.X) * (p.X - p2.X) + (p.Y - p2.Y) * (p.Y - p2.Y));
         }
 
+        //averages points with their neighbors to remove jagedness from the final paths
         public static List<Point> SmoothPath(List<Point> path, int depth)
         {
             List<Point> smoothed = new List<Point>();

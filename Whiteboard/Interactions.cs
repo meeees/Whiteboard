@@ -19,6 +19,7 @@ namespace Whiteboard
     {
         bool isDrawing = false;
 
+        //when the drawing or selecting button has been pressed in the toolbar, newState will be true for drawing and false for selecting
         void UpdateSelectionButtons(bool newState)
         {
             if (newState == isDrawing) 
@@ -35,11 +36,13 @@ namespace Whiteboard
                 buttonSelecting.Background = Brushes.LightGray;
             }
         }
+        //takes the selecting or drawing button press and calls UpdateSelectionButtons with the correct newState
         void StateButtonPress(object sender, RoutedEventArgs e)
         {
             UpdateSelectionButtons(sender == buttonDrawing);
         }
 
+        //whenever a board's header is clicked on, close it if it was the middle mouse button
         void CloseBoardFromHeader(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
@@ -50,6 +53,12 @@ namespace Whiteboard
                 grandParent.Items.Remove(parent);
             }
         }
+
+        void ButtonToggleToolbar(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         void CloseActiveBoard(object sender, RoutedEventArgs e)
         {
             int selected = tabController.SelectedIndex;

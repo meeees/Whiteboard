@@ -25,8 +25,8 @@
         <TabControl x:Name="tabController" Margin="150,20,0,0">
 
         </TabControl>
-        <StackPanel HorizontalAlignment="Left" Height="344" Margin="5,25,0,5" VerticalAlignment="Top" Width="140">
-            <Button Width="20" Height="20" HorizontalAlignment="Right" Content="&lt;"/>
+        <StackPanel x:Name="panelToolBar" HorizontalAlignment="Left" Height="344" Margin="5,25,0,5" VerticalAlignment="Top" Width="140">
+            <Button Width="20" Height="20" HorizontalAlignment="Right" Content="&lt;" Click="ButtonToggleToolbar"/>
             <StackPanel HorizontalAlignment="Center" Height="30" Orientation="Horizontal" Margin="0,-20,0,0">
                 <Button Width="25" Height="25" Margin="5,0,5,0" x:Name="buttonSelecting" Content="S" Click="StateButtonPress"/>
                 <Button Width="25" Height="25" Margin="5,0,5,0" x:Name="buttonDrawing" Content="D" Click="StateButtonPress"/>
