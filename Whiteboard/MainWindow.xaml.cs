@@ -30,10 +30,10 @@ namespace Whiteboard
         }
         void CanvasMouseClick(object sender, RoutedEventArgs e)
         {
+            MouseEventArgs mouse = (MouseEventArgs)e;
             if (isDrawing)
             {
                 //Create a new Polyline and add it to the Canvas
-                MouseEventArgs mouse = (MouseEventArgs)e;
                 if (currentLine == null && mouse.LeftButton == MouseButtonState.Pressed)
                 {
                     Point mousePoint = mouse.GetPosition((IInputElement)sender);
@@ -49,7 +49,16 @@ namespace Whiteboard
             }
             else
             {
-
+                if(Mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    Point mousePoint = mouse.GetPosition((IInputElement)sender);
+                    Canvas canvas = (Canvas)sender;
+                    Polyline selection = GetPolylineAtPoint(canvas, mousePoint);
+                    if(selection != null)
+                    {
+                        canvas.Children.Remove(selection);
+                    }
+                }
             }
         }
         void CanvasMouseMove(object sender, RoutedEventArgs e)
@@ -81,10 +90,6 @@ namespace Whiteboard
                     currentLine.Points = collect;
                     currentLine = null;
                 }
-            }
-            else
-            {
-
             }
         }
     }

@@ -20,6 +20,21 @@ namespace Whiteboard
         bool isDrawing = false;
         bool toolbarOpen = true;
 
+        Polyline GetPolylineAtPoint(Canvas c, Point p)
+        {
+            foreach (UIElement ui in c.Children)
+            {
+                if (ui is Polyline)
+                {
+                    Polyline uiLine = (Polyline)ui;
+                    if (uiLine.RenderedGeometry.StrokeContains(new Pen(uiLine.Stroke, uiLine.StrokeThickness), p))
+                    {
+                        return uiLine;
+                    }
+                }
+            }
+            return null;
+        }
         //when the drawing or selecting button has been pressed in the toolbar, newState will be true for drawing and false for selecting
         void UpdateSelectionButtons(bool newState)
         {
@@ -43,11 +58,11 @@ namespace Whiteboard
             UpdateSelectionButtons(sender == buttonDrawing);
         }
 
-        //whenever a board's header is clicked on, close it if it was the middle mouse button (can be bugged by holding down middle mouse then just clicking with any other mouse button)
+        //whenever a board's header is clicked on, close it if it was the middle mouse button
         void CloseBoardFromHeader(object sender, RoutedEventArgs e)
         {
             MouseEventArgs mouse = (MouseEventArgs)e;
-            if (mouse.MiddleButton == MouseButtonState.Pressed)
+            if (mouse.MiddleButton == MouseButtonState.Pressed && mouse.LeftButton == MouseButtonState.Released && mouse.RightButton == MouseButtonState.Released)
             {
                 TabItem parent = (TabItem)((Control)sender).Parent;
                 TabControl grandParent = (TabControl)parent.Parent;
