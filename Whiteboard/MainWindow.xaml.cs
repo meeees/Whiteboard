@@ -22,6 +22,7 @@ namespace Whiteboard
     public partial class MainWindow : Window
     {
         Polyline currentLine;
+        SolidColorBrush drawingBrush = Brushes.Black;
         int newTabCount = 1;
         public MainWindow()
         {
@@ -39,7 +40,7 @@ namespace Whiteboard
                     Point mousePoint = mouse.GetPosition((IInputElement)sender);
                     currentLine = new Polyline
                     {
-                        Stroke = Brushes.Black,
+                        Stroke = drawingBrush,
                         StrokeThickness = sliderStrokeSize.Value
                     };
                     Canvas canvas = (Canvas)sender;

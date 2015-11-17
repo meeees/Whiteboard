@@ -32,7 +32,24 @@
                 </StackPanel>
                 <Label Content="Stroke Size" HorizontalAlignment="Center"></Label>
                 <Slider x:Name="sliderStrokeSize" Minimum="2" Maximum="20" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Value="2" TickFrequency="2"></Slider>
-                <TextBox Text="{Binding ElementName=sliderStrokeSize, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="40" />
+                <TextBox Text="{Binding ElementName=sliderStrokeSize, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="40" Margin="0, 0, 0, 10"/>
+                <Label Content="Red" HorizontalAlignment="Left" Margin="10,0,0,-2"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Slider x:Name="sliderRedValue" ValueChanged="ColorSliderChanged" Minimum="0" Maximum="255" TickPlacement="None" IsSnapToTickEnabled="True" Value="0" TickFrequency="1" Width="110"></Slider>
+                    <TextBox Text="{Binding Value, ElementName=sliderRedValue, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Width="30" />
+                </StackPanel>
+                <Label Content="Green" HorizontalAlignment="Left" Margin="10,0,0,-2"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Slider x:Name="sliderGreenValue" ValueChanged="ColorSliderChanged" Minimum="0" Maximum="255" TickPlacement="None" IsSnapToTickEnabled="True" Value="0" TickFrequency="1" Width="110"></Slider>
+                    <TextBox Text="{Binding Value, ElementName=sliderGreenValue, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Width="30" />
+                </StackPanel>
+                <Label Content="Blue" HorizontalAlignment="Left" Margin="10,0,0,-2"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <Slider x:Name="sliderBlueValue" ValueChanged="ColorSliderChanged" Minimum="0" Maximum="255" TickPlacement="None" IsSnapToTickEnabled="True" Value="0" TickFrequency="1" Width="110"></Slider>
+                    <TextBox Text="{Binding Value, ElementName=sliderBlueValue, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Width="30" />
+                </StackPanel>
+                <Rectangle x:Name="rectangleColorView" Fill="Black" Width="50" Height="50" Margin="10,10,0,0" HorizontalAlignment="Left"></Rectangle>
+                
             </StackPanel>
             <TabControl x:Name="tabController" Margin="2,20,0,0">
 

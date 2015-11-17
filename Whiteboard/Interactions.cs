@@ -164,5 +164,12 @@ namespace Whiteboard
         {
             Application.Current.Shutdown();
         }
+
+        void ColorSliderChanged(object sender, EventArgs e)
+        {
+            SolidColorBrush newBrush = new SolidColorBrush(Color.FromArgb(255, (byte)sliderRedValue.Value, (byte)sliderGreenValue.Value, (byte)sliderBlueValue.Value));
+            rectangleColorView.Fill = newBrush;
+            drawingBrush = newBrush;
+        }
     }
 }
