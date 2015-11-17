@@ -41,7 +41,8 @@ namespace Whiteboard
                     currentLine = new Polyline
                     {
                         Stroke = drawingBrush,
-                        StrokeThickness = sliderStrokeSize.Value
+                        StrokeThickness = sliderStrokeSize.Value,
+                        StrokeMiterLimit = 1
                     };
                     Canvas canvas = (Canvas)sender;
                     canvas.Children.Add(currentLine);
@@ -71,12 +72,13 @@ namespace Whiteboard
                 if (currentLine != null && mouse.LeftButton == MouseButtonState.Pressed)
                 {
                     Point mousePoint = mouse.GetPosition((IInputElement)sender);
+                    Point lastPoint = currentLine.Points[currentLine.Points.Count - 1];
                     currentLine.Points.Add(mousePoint);
                 }
             }
             else
             {
-
+               
             }
         }
 
