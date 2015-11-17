@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:main="clr-namespace:Whiteboard"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="Whiteboard" Height="500" Width="700">
     <Window.CommandBindings>
         <CommandBinding Command="main:WhiteboardCommands.CloseActiveBoard" Executed="CloseActiveBoard"/>
@@ -30,7 +31,7 @@
                     <Button Width="25" Height="25" Margin="5,0,5,0" x:Name="buttonDrawing" Content="D" Click="StateButtonPress"/>
                 </StackPanel>
                 <Label Content="Stroke Size" HorizontalAlignment="Center"></Label>
-                <Slider x:Name="sliderStrokeSize" Minimum="1" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Value="2"></Slider>
+                <Slider x:Name="sliderStrokeSize" Minimum="2" Maximum="20" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Value="2" TickFrequency="2"></Slider>
                 <TextBox Text="{Binding ElementName=sliderStrokeSize, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="40" />
             </StackPanel>
             <TabControl x:Name="tabController" Margin="2,20,0,0">

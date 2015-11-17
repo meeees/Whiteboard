@@ -78,6 +78,7 @@ namespace Whiteboard
 
             }
         }
+
         void CanvasMouseClickEnd(object sender, RoutedEventArgs e)
         {
             if (isDrawing)
@@ -90,6 +91,16 @@ namespace Whiteboard
                     currentLine.Points = collect;
                     currentLine = null;
                 }
+            }
+        }
+
+        void CanvasMouseClickExit(object sneder, RoutedEventArgs e)
+        {
+            if (isDrawing && currentLine != null)
+            {
+                PointCollection collect = new PointCollection(PathFunctions.SmoothPath(PathFunctions.RemoveInsignificants(currentLine.Points.ToList<Point>()), 2));
+                currentLine.Points = collect;
+                currentLine = null;
             }
         }
     }

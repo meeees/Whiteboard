@@ -134,6 +134,7 @@ namespace Whiteboard
             tabCanvas.AddHandler(Mouse.MouseDownEvent, new RoutedEventHandler(CanvasMouseClick));
             tabCanvas.AddHandler(Mouse.MouseMoveEvent, new RoutedEventHandler(CanvasMouseMove));
             tabCanvas.AddHandler(Mouse.MouseUpEvent, new RoutedEventHandler(CanvasMouseClickEnd));
+            tabCanvas.AddHandler(Mouse.MouseLeaveEvent, new RoutedEventHandler(CanvasMouseClickExit));
             newTab.Content = tabCanvas;
             newTabCount++;
             tabController.Items.Add(newTab);
