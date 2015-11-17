@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataManager.cs" />
     <Compile Include="Interactions.cs" />
     <Compile Include="PathFunctions.cs" />
     <Compile Include="WhiteboardCommands.cs" />
