@@ -19,6 +19,11 @@ namespace Whiteboard
 {
     public partial class MainWindow : Window
     {
+        //if I decide to change how I save/load files later, I would like to provide support for previous versions
+        private static double savingProtocol = 1.0;
+        //Previous versions:
+        //0.0 (No protocol) First tests, no longer supported
+
         void Menu_Save(object sender, EventArgs e)
         {
             if(tabController.SelectedIndex == -1)
@@ -31,7 +36,7 @@ namespace Whiteboard
             Label header = (Label)currentBoard.Header;
             dialog.FileName = (string) header.Content;
             dialog.DefaultExt = ".wtb";
-            dialog.Filter = "Whiteboard Files (.wtb)|*.wtb";
+            dialog.Filter = "Whiteboard Files (.wbd)|*.wbd";
             Nullable<bool> result = dialog.ShowDialog();
             if (result == true)
             {
@@ -46,6 +51,7 @@ namespace Whiteboard
                         linesToWrite.Add((Polyline)ele); 
                     }
                 }
+                write.Write(savingProtocol); //Write the current saving protocol to the file
                 write.Write(linesToWrite.Count); //Write the total number of lines to the file
                 foreach(Polyline line in linesToWrite)
                 {
@@ -65,8 +71,56 @@ namespace Whiteboard
                         write.Write(p.Y); //Write Y coord to the file
                     }
                 }
+                header.Content = System.IO.Path.GetFileNameWithoutExtension(fileName);
                 write.Close();
             }
+        }
+
+        void Menu_Load(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.FileName = "";
+            dialog.DefaultExt = ".wtb";
+            dialog.Filter = "Whiteboard Files (.wbd)|*.wbd";
+            Nullable<bool> result = dialog.ShowDialog();
+            if (result == true)
+            {
+                AddNewBoard(sender, (RoutedEventArgs)e);
+                TabItem loadedBoard = (TabItem)tabController.Items[tabController.SelectedIndex];
+                Canvas loadCanvas = (Canvas)loadedBoard.Content;
+                Label header = (Label)loadedBoard.Header;
+                string fileName = dialog.FileName;
+                header.Content = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                BinaryReader read = new BinaryReader(new FileStream(fileName, FileMode.Open));
+                List<Polyline> linesToWrite = new List<Polyline>();
+                double protocolUsed = read.ReadDouble(); //Read in the protocol used when saving
+                if(protocolUsed == 1.0)
+                {
+                    int lineCount = read.ReadInt32();
+                    for (int i = 0; i < lineCount; i++)
+                    {
+                        double thickness = read.ReadDouble();
+                        byte A = read.ReadByte();
+                        byte R = read.ReadByte();
+                        byte G = read.ReadByte();
+                        byte B = read.ReadByte();
+                        int pointCount = read.ReadInt32();
+                        Polyline newLine = new Polyline();
+                        newLine.StrokeThickness = thickness;
+                        newLine.Stroke = new SolidColorBrush(Color.FromArgb(A, R, G, B));
+                        for(int j = 0; j < pointCount; j++)
+                        {
+                            double X = read.ReadDouble();
+                            double Y = read.ReadDouble();
+                            newLine.Points.Add(new Point(X, Y));
+                        }
+                        loadCanvas.Children.Add(newLine);
+                    }
+                    read.Close();
+                }
+            }
+
         }
     }
 

@@ -9,19 +9,24 @@
         <CommandBinding Command="main:WhiteboardCommands.CreateNewBoard" Executed="AddNewBoard"/>
         <CommandBinding Command="main:WhiteboardCommands.MoveActiveForwards" Executed="MoveActiveF"/>
         <CommandBinding Command="main:WhiteboardCommands.MoveActiveBackwards" Executed="MoveActiveB"/>
+        <CommandBinding Command="main:WhiteboardCommands.SaveActiveBoard" Executed="Menu_Save"/>
+        <CommandBinding Command="main:WhiteboardCommands.LoadSavedBoard" Executed="Menu_Load"/>
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Command="main:WhiteboardCommands.CloseActiveBoard" Modifiers="Control" Key="W"/>
         <KeyBinding Command="main:WhiteboardCommands.CreateNewBoard" Modifiers="Control" Key="N"/>
         <KeyBinding Command="main:WhiteboardCommands.MoveActiveForwards" Modifiers="Control" Key="Tab"/>
         <KeyBinding Command="main:WhiteboardCommands.MoveActiveBackwards" Modifiers="Control+Shift" Key="Tab"/>
+        <KeyBinding Command="main:WhiteboardCommands.SaveActiveBoard" Modifiers="Control" Key="S"/>
+        <KeyBinding Command="main:WhiteboardCommands.LoadSavedBoard" Modifiers="Control" Key="O"/>
     </Window.InputBindings>
     <Grid>
         <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="File" Height="20">
-                <MenuItem Header="New" HorizontalAlignment="Left" Width="110" Margin="0,0,0,0" Click="Menu_New"/>
-                <MenuItem Header="Save" HorizontalAlignment="Left" Width="110" Margin="0,0,0,0" Click="Menu_Save"/>
-                <MenuItem Header="Exit" HorizontalAlignment="Left" Width="110" Margin="0,0,0,0" Click="Menu_Exit"/>
+                <MenuItem Header="New" HorizontalAlignment="Left" Width="150" Margin="0,0,0,0" Click="Menu_New" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="Save" HorizontalAlignment="Left" Width="150" Margin="0,0,0,0" Click="Menu_Save" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Open" HorizontalAlignment="Left" Width="150" Margin="0,0,0,0" Click="Menu_Load" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="Exit" HorizontalAlignment="Left" Width="150" Margin="0,0,0,0" Click="Menu_Exit"/>
             </MenuItem>
         </Menu>
         <DockPanel>
